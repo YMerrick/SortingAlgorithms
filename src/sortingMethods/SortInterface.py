@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 class SortInterface(ABC):
     '''Interface class to be implemented by various sorting algorithms'''
+    @classmethod
     @abstractmethod
     def sort(nums: list[int]) -> None:
         '''
