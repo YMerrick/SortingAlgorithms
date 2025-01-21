@@ -2,6 +2,20 @@ import pytest
 import random
 
 from src.sortingMethods.BubbleSort import BubbleSort
+from src.sortingMethods.InsertionSort import InsertionSort
+from src.sortingMethods.SortInterface import SortInterface
+
+sort_algo_list = [
+    BubbleSort,
+    InsertionSort,
+]
+pytestmark = pytest.mark.parametrize("sort_algo", sort_algo_list, indirect=True)
+
+size_of_n = [
+    10,
+    100,
+    1000,
+]
 
 
 @pytest.fixture
@@ -9,12 +23,10 @@ def number_series(request):
     n = request.param
     return list(range(n))
 
-
 @pytest.fixture
-def shuffled_series(number_series):
-    shuffled_list = number_series.copy()
-    random.shuffle(shuffled_list)
-    return shuffled_list
+def all5(request):
+    n = request.param
+    return [5] * n
 
 
 @pytest.fixture
@@ -23,11 +35,28 @@ def sort_algo(request):
     return sorting_method
 
 
-@pytest.mark.parametrize("sort_algo", [BubbleSort], indirect=True)
-@pytest.mark.parametrize("number_series", [10, 100, 1000], indirect=True)
-def test_sort(shuffled_series, number_series, sort_algo):
+@pytest.mark.parametrize("number_series", size_of_n, indirect=True)
+def test_sort_with_series(number_series: list[int], sort_algo: SortInterface):
     # Act
+    test_space = number_series.copy()
+    random.shuffle(test_space)
     # Perform sort
-    sort_algo.sort(shuffled_series)
+    sort_algo.sort(test_space)
 
-    assert shuffled_series == number_series
+    assert test_space == number_series
+
+
+@pytest.mark.parametrize("all5", size_of_n, indirect=True)
+def test_sort_with_all_fives(all5: list[int], sort_algo: SortInterface):
+    test_space = all5.copy()
+    random.shuffle(test_space)
+    sort_algo.sort(test_space)
+    assert test_space == all5
+
+
+@pytest.mark.parametrize("number_series", size_of_n, indirect=True)
+def test_sort_with_reversed(number_series: list[int], sort_algo: SortInterface):
+    test_space = number_series.copy()
+    test_space.reverse()
+    sort_algo.sort(test_space)
+    assert test_space == number_series
