@@ -1,9 +1,8 @@
 import pytest
 import random
 
-from src.sortingMethods.BubbleSort import BubbleSort
-from src.sortingMethods.InsertionSort import InsertionSort
-from src.sortingMethods.SortInterface import SortInterface
+from src.sortingMethods import (BubbleSort, InsertionSort, SortInterface,
+                                SelectionSort,)
 
 sort_algo_list = [
     BubbleSort,
@@ -22,6 +21,7 @@ size_of_n = [
 def number_series(request):
     n = request.param
     return list(range(n))
+
 
 @pytest.fixture
 def all5(request):
@@ -49,7 +49,6 @@ def test_sort_with_series(number_series: list[int], sort_algo: SortInterface):
 @pytest.mark.parametrize("all5", size_of_n, indirect=True)
 def test_sort_with_all_fives(all5: list[int], sort_algo: SortInterface):
     test_space = all5.copy()
-    random.shuffle(test_space)
     sort_algo.sort(test_space)
     assert test_space == all5
 
