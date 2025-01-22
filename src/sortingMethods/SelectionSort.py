@@ -1,7 +1,7 @@
 from .SortInterface import SortInterface
 
 class SelectionSort(SortInterface):
-    def sort(nums: list[int], reverse: bool = None):
+    def sort(nums: list[int], reverse: bool = False):
         if not reverse:
             compare_function = lambda unsorted_subset: min(unsorted_subset)
         else:
