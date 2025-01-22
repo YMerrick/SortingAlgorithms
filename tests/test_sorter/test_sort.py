@@ -7,6 +7,7 @@ from src.sortingMethods import (BubbleSort, InsertionSort, SortInterface,
 sort_algo_list = [
     BubbleSort,
     InsertionSort,
+    SelectionSort
 ]
 pytestmark = pytest.mark.parametrize("sort_algo", sort_algo_list, indirect=True)
 
