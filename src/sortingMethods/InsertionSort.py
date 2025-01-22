@@ -1,7 +1,7 @@
 from .SortInterface import SortInterface
 
 class InsertionSort(SortInterface):
-    def sort(nums, reverse = False):
+    def sort(nums: list[int], reverse: bool = False):
         if not reverse:
             compare_function = lambda a, b: a < b
         else:
