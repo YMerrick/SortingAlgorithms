@@ -4,7 +4,8 @@ from .SortInterface import SortInterface
 
 
 class StrandSort(SortInterface):
-    def __merge_lists(list1: list[int], list2: list[int], compare_function: Callable):
+    def __merge_lists(list1: list[int], list2: list[int],
+                      compare_function: Callable):
         output = []
         while list1 and list2:
             if not compare_function(list1[0], list2[0]):
@@ -27,7 +28,13 @@ class StrandSort(SortInterface):
             else:
                 i += 1
 
-        return StrandSort.__merge_lists(sublist, StrandSort.__strand_sort(nums, compare_function), compare_function)
+        return (
+            StrandSort.__merge_lists(sublist,
+                                     StrandSort.__strand_sort(
+                                         nums,
+                                         compare_function),
+                                     compare_function)
+        )
 
 
     def sort(nums: list[int], reverse: bool = False):
