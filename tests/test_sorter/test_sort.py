@@ -7,7 +7,7 @@ from src.sortingMethods import (BubbleSort, InsertionSort, SortInterface,
 sort_algo_list = [
     BubbleSort,
     InsertionSort,
-    SelectionSort
+    SelectionSort,
 ]
 pytestmark = pytest.mark.parametrize("sort_algo", sort_algo_list, indirect=True)
 
@@ -59,4 +59,13 @@ def test_sort_with_reversed(number_series: list[int], sort_algo: SortInterface):
     test_space = number_series.copy()
     test_space.reverse()
     sort_algo.sort(test_space)
+    assert test_space == number_series
+
+
+@pytest.mark.parametrize("number_series", size_of_n, indirect = True)
+def test_sort_desc_with_series(number_series: list[int], sort_algo: SortInterface):
+    number_series.reverse()
+    test_space = number_series.copy()
+    random.shuffle(test_space)
+    sort_algo.sort(test_space, reverse = True)
     assert test_space == number_series
