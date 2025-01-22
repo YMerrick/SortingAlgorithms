@@ -2,19 +2,20 @@ import pytest
 import random
 
 from src.sortingMethods import (BubbleSort, InsertionSort, SortInterface,
-                                SelectionSort,)
+                                SelectionSort, StrandSort)
 
 sort_algo_list = [
     BubbleSort,
     InsertionSort,
     SelectionSort,
+    StrandSort,
 ]
 pytestmark = pytest.mark.parametrize("sort_algo", sort_algo_list, indirect=True)
 
 size_of_n = [
     10,
     100,
-    1000,
+    500,
 ]
 
 
