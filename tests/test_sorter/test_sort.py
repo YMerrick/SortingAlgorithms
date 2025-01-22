@@ -3,13 +3,14 @@ import random
 
 from src.sortingMethods import (BubbleSort, InsertionSort,
                                 SortInterface, SelectionSort,
-                                StrandSort)
+                                StrandSort, MergeSort)
 
 sort_algo_list = [
     BubbleSort,
     InsertionSort,
     SelectionSort,
     StrandSort,
+    MergeSort,
 ]
 pytestmark = pytest.mark.parametrize("sort_algo",
                                      sort_algo_list,
